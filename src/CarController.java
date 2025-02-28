@@ -68,6 +68,7 @@ public class CarController {
 
                 // About to hit a wall?  => stop + switch direction + starta motor
                 if ((x < 0 || x > 800) || (y < 0 || y > 800)) {
+
                     //car.stopEngine();
                     car.turnLeft();
                     car.turnLeft();
@@ -90,66 +91,6 @@ public class CarController {
                 }
 
             }
-        }
-    }
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars
-                ) {
-            car.gas(gas);
-        }
-    }
-
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Car car : cars){
-            car.brake(brake);
-        }
-    }
-
-    void turboOn() {
-        for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOn();
-            }
-        }
-    }
-
-    void turboOff() {
-        for (Car car : cars){
-            if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
-            }
-        }
-    }
-
-    void liftBed(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).setFlatbedAngle(70);
-            }
-        }
-    }
-
-    void lowerBed(){
-        for (Car car : cars){
-            if (car instanceof Scania){
-                ((Scania) car).setFlatbedAngle(0);
-            }
-        }
-    }
-
-    void stop(){
-        for (Car car : cars){
-            car.stopEngine();
-        }
-    }
-
-    void start(){
-        for (Car car : cars){
-            car.startEngine();
         }
     }
 
