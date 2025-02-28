@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,16 +19,16 @@ public class DrawPanel extends JPanel{
     HashMap<Car, Point> carAndPoint = new HashMap<>();
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(0,300);
 
-    public void addToCarAndPoint(Car vehicle, Point point) {
-        carAndPoint.put(vehicle, point);
-    }
+    // is provided by Model
+    private ArrayList<Car> allCars = new ArrayList<>();
+    private ArrayList<Garage> allGarage = new ArrayList<>();
 
-    void moveit(Car car, int x, int y){
-        Point generalPoint = carAndPoint.get(car);
-        generalPoint.x = x;
-        generalPoint.y = y;
+    @Override
+    public void notify(Model model){
+        this.allCars = model.getAllCars();
+        this.allGarage = model.getAllGarage();
+        SwingUtilities.invokeLater(this::repaint);
     }
 
     // Initializes the panel and reads the images
@@ -50,13 +51,11 @@ public class DrawPanel extends JPanel{
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for(Car vehicle : carAndPoint.keySet()){
-            String model = vehicle.getCarModel();
-            Point general = carAndPoint.get(vehicle);
+        for(Car car : allCars){
+            String model = car.getCarModel();
             BufferedImage img = null;
             if(model == "Volvo240"){
                 img = volvoImage;
@@ -67,8 +66,10 @@ public class DrawPanel extends JPanel{
             } else {
                 System.out.println("img does not exist");
             }
-            g.drawImage(img, general.x, general.y, null);
+            g.drawImage(img, (int) car.getX(), (int) car.getY(), null);
         }
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        for (Garage garage : allGarage){
+            g.drawImage(volvoWorkshopImage, (int) garage.getX(), (int) garage.getY(), null);
+        }
     }
 }
