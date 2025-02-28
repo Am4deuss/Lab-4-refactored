@@ -62,6 +62,14 @@ public class CarController {
         model.lowerBed();
     }
 
+    void start(){
+        model.start();
+    }
+
+    void stop(){
+        model.stop();
+    }
+
     void addCar() {
         model.addCar();
     }
