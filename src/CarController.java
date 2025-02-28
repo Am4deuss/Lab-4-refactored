@@ -12,46 +12,17 @@ import java.util.ArrayList;
 
 public class CarController {
     // member fields:
-
+    private final Model model;
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
     private Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
-    // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
-
-    // Creating a new Volvo workshop
-    Garage<Volvo240>  volvoGarage = new Garage<>(5, 0, 300, Volvo240.class);
-
     //methods:
 
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        ArrayList<Car> allVehicles = new ArrayList<>();
-        Volvo240 volvo = new Volvo240();
-        Saab95 saab95 = new Saab95();
-        Scania scania = new Scania();
-        allVehicles.add(volvo);
-        allVehicles.add(saab95);
-        allVehicles.add(scania);
-        int currentY = 0;
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        for(Car vehicle : allVehicles){
-            vehicle.updatePos(0, currentY);
-            cc.cars.add(vehicle);
-            cc.frame.drawPanel.addToCarAndPoint(vehicle, new Point((int)vehicle.getX(), (int)vehicle.getY()));
-            currentY += 100;
-        }
-
+    public CarController(Model model) {
+        this.model = model;
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -66,5 +37,38 @@ public class CarController {
     public void startup(){
         timer.start();
     }
+
+    void gas(int amount) {
+        model.gas(amount);
+    }
+
+    void brake(int amount) {
+        model.brake(amount);
+    }
+
+    void turboOn() {
+        model.turboOn();
+    }
+
+    void turboOff() {
+        model.turboOn();
+    }
+
+    void liftBed() {
+        model.liftBed();
+    }
+
+    void lowerBed() {
+        model.lowerBed();
+    }
+
+    void addCar() {
+        model.addCar();
+    }
+
+    void removeCar() {
+        model.removeCar();
+    }
+
 
 }

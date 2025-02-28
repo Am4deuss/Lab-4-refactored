@@ -20,9 +20,11 @@ public class CreateCars {
         return scania;
     }
 
-    public static Car createRandom(int x, int y){
+    public static Car createRandom(){
         Random random = new Random();
         int randomInt = random.nextInt(3);
+        int x = random.nextInt(300);
+        int y = random.nextInt(300);
         if(randomInt == 0){
             return createVolvo(x, y);
         } else if(randomInt == 1){

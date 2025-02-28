@@ -97,6 +97,18 @@ public class Model {
         }
     }
 
+    void addCar(){
+        if (allCars.size() < 10){
+            allCars.add(CreateCars.createRandom());
+        }
+    }
+
+    void removeCar(){
+        if (!allCars.isEmpty()){
+            allCars.removeLast();
+        }
+    }
+
     public void timerUpdate(){
         for (Car car : allCars){
             car.move();
