@@ -55,18 +55,20 @@ public class DrawPanel extends JPanel implements Subscriber{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for(Car car : allCars){
-            String model = car.getCarModel();
-            BufferedImage img = null;
-            if(model == "Volvo240"){
-                img = volvoImage;
-            } else if (model == "Saab95"){
-                img = saab95Image;
-            } else if (model == "Scania"){
-                img = scaniaImage;
-            } else {
-                System.out.println("img does not exist");
+            if(!car.getLoaded()) {
+                String model = car.getCarModel();
+                BufferedImage img = null;
+                if (model == "Volvo240") {
+                    img = volvoImage;
+                } else if (model == "Saab95") {
+                    img = saab95Image;
+                } else if (model == "Scania") {
+                    img = scaniaImage;
+                } else {
+                    System.out.println("img does not exist");
+                }
+                g.drawImage(img, (int) car.getX(), (int) car.getY(), null);
             }
-            g.drawImage(img, (int) car.getX(), (int) car.getY(), null);
         }
         for (Garage garage : allGarage){
             g.drawImage(volvoWorkshopImage, (int) garage.getX(), (int) garage.getY(), null);

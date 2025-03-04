@@ -9,6 +9,7 @@ public abstract class Car implements Movable {
     protected String modelName; // The car model name
     protected double x; // X-coordinate
     protected double y; // Y-coordinate
+    protected boolean loaded; // loaded in garage?
 
     protected enum Directions{
         N,
@@ -23,6 +24,7 @@ public abstract class Car implements Movable {
         x = 0;
         y = 0;
         current_dir = Directions.N;
+        loaded = false;
     }
 
     public int getNrDoors(){
@@ -51,6 +53,18 @@ public abstract class Car implements Movable {
 
     public String getCarModel() {
         return modelName;
+    }
+
+    public boolean getLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded() {
+        if(loaded){
+            loaded = false;
+        } else {
+            loaded = true;
+        }
     }
 
     protected void updatePos(double xCar, double yCar) {

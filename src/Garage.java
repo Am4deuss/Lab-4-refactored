@@ -37,9 +37,12 @@ public class Garage<T extends Car> {
         if(!vehiclesStored.contains(vehicle)) {
             if (isAccepted(vehicle)) {
                 vehiclesStored.add(vehicle);
+                System.out.println("Car loaded successfully!");
+                vehicle.setLoaded();
             } else {
                 System.out.println(vehicle.getCarModel());
-                throw new IllegalArgumentException("Wrong car type :P");
+                System.out.println("Wrong car type!");
+                //throw new IllegalArgumentException("Wrong car type :P");
             }
         }
     }
@@ -48,6 +51,7 @@ public class Garage<T extends Car> {
        Car removedCar = null;
        if(vehicleIndex != 0 && vehicleIndex < vehiclesStored.size()) {
            removedCar = vehiclesStored.get(vehicleIndex);
+           removedCar.setLoaded();
            vehiclesStored.remove(vehicleIndex);
        }
        return removedCar;

@@ -143,7 +143,7 @@ public class Model {
     private void garageCollision(Car car, Garage garage){
         if((Math.abs(car.getY() - garage.getY()) <= 50) && (Math.abs(car.getX() - garage.getX()) <= 50)){
             if(!garage.getVehiclesStored().contains(car)) {
-                System.out.println("Successfully loaded VOLVO <3");
+                System.out.println("Trying to load car");
             }
             garage.addVehicle(car);
 
